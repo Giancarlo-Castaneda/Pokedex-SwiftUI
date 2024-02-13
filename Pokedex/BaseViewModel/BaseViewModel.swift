@@ -34,8 +34,8 @@ open class DefaultViewModel: BaseViewModel, ObservableObject {
     var loadingState = CurrentValueSubject<ViewModelStatus, Never>(.dismissAlert)
     let subscriber = Cancelable()
 
-    func callWithProgress<ReturnType>(argument: AnyPublisher<ReturnType?, APIError>,
-                                      callback: @escaping (_ data: ReturnType?) -> Void) {
+    func callWithProgress<ReturnType>(argument: AnyPublisher<ReturnType, APIError>,
+                                      callback: @escaping (_ data: ReturnType) -> Void) {
         self.loadingState.send(.loadStart)
 
         let completionHandler: (Subscribers.Completion<APIError>) -> Void = { [weak self] completion in
@@ -48,7 +48,7 @@ open class DefaultViewModel: BaseViewModel, ObservableObject {
             }
         }
 
-        let resultValueHandler: (ReturnType?) -> Void = { data in
+        let resultValueHandler: (ReturnType) -> Void = { data in
             callback(data)
         }
 
@@ -59,11 +59,11 @@ open class DefaultViewModel: BaseViewModel, ObservableObject {
             .store(in: subscriber)
     }
 
-    func callWithoutProgress<ReturnType>(argument: AnyPublisher<ReturnType?,
+    func callWithoutProgress<ReturnType>(argument: AnyPublisher<ReturnType,
                                          APIError>,
-                                         callback: @escaping (_ data: ReturnType?) -> Void) {
+                                         callback: @escaping (_ data: ReturnType) -> Void) {
 
-        let resultValueHandler: (ReturnType?) -> Void = { data in
+        let resultValueHandler: (ReturnType) -> Void = { data in
             callback(data)
         }
 
