@@ -68,18 +68,6 @@ struct PokemonDetailModel: PokemonDetailModelProtocol {
     // MARK: - Private Properties
 
     private let pokemonData: PokemonData
-    private var inGame: [(URL?, SpriteImagesType)] {
-        [
-            (pokemonData.sprites.frontDefault, SpriteImagesType.frontDefault),
-            (pokemonData.sprites.backDefault, SpriteImagesType.backDefault),
-            (pokemonData.sprites.frontFemale, SpriteImagesType.frontFemale),
-            (pokemonData.sprites.backFemale, SpriteImagesType.backFemale),
-            (pokemonData.sprites.frontShiny, SpriteImagesType.frontShiny),
-            (pokemonData.sprites.backShiny, SpriteImagesType.backShiny),
-            (pokemonData.sprites.frontShinyFemale, SpriteImagesType.frontShinyFemale),
-            (pokemonData.sprites.backShinyFemale, SpriteImagesType.backShinyFemale)
-        ].filter { $0.0 != nil }
-    }
 
     // MARK: - Initialization
 
