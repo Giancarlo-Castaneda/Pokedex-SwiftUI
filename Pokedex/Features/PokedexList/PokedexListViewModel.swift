@@ -24,9 +24,9 @@ final class PokedexListViewModel: DefaultViewModel {
 
     func getPokemonData() {
         guard page < totalPokemons || page == 0 else { return }
-        let publiser = repository.fetch(offset: page, resultLimit: perPage)
+        let publisher = repository.fetch(offset: page, resultLimit: perPage)
 
-        callWithProgress(argument: publiser) { [weak self] data in
+        callWithProgress(argument: publisher) { [weak self] data in
             guard let self else { return }
 
             totalPokemons = data.count

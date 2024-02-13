@@ -21,9 +21,9 @@ final class PokemonDetailViewModel: DefaultViewModel {
     }
 
     func fetchEvolutionChain(id: Int) {
-        let publiser = repository.fetchEvolution(id: id)
+        let publisher = repository.fetchEvolution(id: id)
 
-        callWithProgress(argument: publiser) { [weak self] data in
+        callWithProgress(argument: publisher) { [weak self] data in
             guard let self else { return }
 
             var temp = [data.chain]
