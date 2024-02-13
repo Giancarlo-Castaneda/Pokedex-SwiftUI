@@ -1,5 +1,5 @@
 //
-//  PokemonCardView.swift
+//  ImageDownloader.swift
 //  Pokedex
 //
 //  Created by Giancarlo Castañeda Garcia on 9/02/24.
@@ -9,14 +9,20 @@ import SwiftUI
 
 final class ImageDownloader: ObservableObject {
     
+    // MARK: - Internal Properties
+
     @Published var image: UIImage?
     var urlString: String?
     var imageCache = DownloadedImageCache.getImageCache()
+
+    // MARK: - Initialization
 
     init(urlString: String?) {
         self.urlString = urlString
         loadImage()
     }
+
+    // MARK: - Internal Methods
 
     func loadImage() {
         if loadImageFromCache() {
@@ -26,11 +32,10 @@ final class ImageDownloader: ObservableObject {
     }
 
     func loadImageFromCache() -> Bool {
-        guard let urlString = urlString else {
-            return false
-        }
-
-        guard let cacheImage = imageCache.get(forKey: urlString) else {
+        guard 
+            let urlString = urlString,
+            let cacheImage = imageCache.get(forKey: urlString)
+        else {
             return false
         }
 
@@ -39,11 +44,11 @@ final class ImageDownloader: ObservableObject {
     }
 
     func loadImageFromUrl() {
-        guard let urlString = urlString else {
-            return
-        }
+        guard
+            let urlString = urlString,
+            let url = URL(string: urlString)
+        else { return }
 
-        guard let url = URL(string: urlString) else {return}
         let task = URLSession.shared.dataTask(with: url, completionHandler: getImageFromResponse(data:response:error:))
         task.resume()
     }
