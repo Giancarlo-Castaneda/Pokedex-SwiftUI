@@ -1,0 +1,10 @@
+
+.DS_Store
+
+Pokedex.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
+*.xcuserstate
+
+*.xcbkptlist
+
+Pokedex.xcodeproj/xcuserdata/giancarlocastaneda.xcuserdatad/xcschemes/xcschememanagement.plist
