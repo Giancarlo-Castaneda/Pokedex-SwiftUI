@@ -47,59 +47,93 @@ struct PokemonDetailView: View {
                         .font(.largeTitle)
                 }
 
-                Text("DATA")
-                    .font(.title)
-                    .padding(.top, 10)
-                HStack {
-                    Text(detailViewModel.pokemonDetail.weight)
-                        .font(.body)
-                    Spacer()
-                    Text(detailViewModel.pokemonDetail.height)
-                        .font(.body)
-                }
-                .padding(.horizontal, 40)
-                .padding(.bottom, 10)
-
-                Text("TYPE")
-                    .font(.title)
-                    .padding(.top, 10)
-                HStack {
-                    ForEach(detailViewModel.pokemonDetail.types, id: \.id) { element in
-                        ChipView(titleKey: element.name, textColor: element.nameColor, colors: element.color)
-                    }
-                }
-
-                Text("INGAME_PREVIEW")
-                    .font(.title)
-                    .padding(.top, 10)
-                ScrollView(.horizontal) {
+                VStack {
+                    Text("TYPE")
+                        .font(.title)
+                        .foregroundStyle(Color.black)
+                        .padding(.top, 10)
                     HStack {
-                        ForEach(detailViewModel.pokemonDetail.inGameImages, id: \.id) { inGame in
-                            Spacer()
-                            VStack {
-                                ImageView(withURL: inGame.image)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 45)
-                                            .fill(Color.gray.opacity(0.3))
-                                    )
-                                Text(inGame.name)
-                                    .font(.title2)
+                        Spacer()
+                        ForEach(detailViewModel.pokemonDetail.types, id: \.id) { element in
+                            ChipView(titleKey: element.name, textColor: element.nameColor, colors: element.color)
+                        }
+                        Spacer()
+                    }
+                    .padding(.bottom, 20)
+
+                    Text("DATA")
+                        .font(.title)
+                        .padding(.top, 10)
+                        .foregroundStyle(Color.black)
+                    HStack {
+                        Text(detailViewModel.pokemonDetail.weight)
+                            .font(.body)
+                            .foregroundStyle(Color.black)
+                        Spacer()
+                        Text(detailViewModel.pokemonDetail.height)
+                            .font(.body)
+                            .foregroundStyle(Color.black)
+                    }
+                    .padding(.horizontal, 40)
+                    .padding(.bottom, 40)
+
+                    BarChartView(data: detailViewModel.pokemonDetail.chartData)
+                        .padding(.horizontal, 15)
+
+                    Text("INGAME_PREVIEW")
+                        .font(.title)
+                        .padding(.top, 10)
+                        .foregroundStyle(Color.black)
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(detailViewModel.pokemonDetail.inGameImages, id: \.id) { inGame in
+                                Spacer()
+                                VStack {
+                                    ImageView(withURL: inGame.image)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 45)
+                                                .fill(Color.gray.opacity(0.3))
+                                        )
+                                    Text(inGame.name)
+                                        .lineLimit(2)
+                                        .font(.title2)
+                                        .foregroundStyle(Color.black)
+                                }
+                                .frame(height: 180)
+                                Spacer()
                             }
-                            .frame(height: 180)
-                            Spacer()
                         }
                     }
+                    .padding(.top)
+                    .padding(.bottom, 50)
                 }
-                .padding(.vertical)
+                .roundedCorner(30, corners: [.topLeft, .topRight])
             }
             .onAppear {
                 detailViewModel.fetch(id: id)
             }
         }
+        .background(Color.purple.opacity(0.3))
         .scrollIndicators(.hidden)
     }
 }
 
 #Preview {
-    PokemonDetailView(id: 454)
+    PokemonDetailView(id: 14)
+}
+
+struct RoundedCorner: Shape {
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
+    }
+}
+
+extension View {
+    func roundedCorner(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(RoundedCorner(radius: radius, corners: corners) )
+    }
 }

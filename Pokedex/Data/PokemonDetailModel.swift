@@ -9,6 +9,7 @@ protocol PokemonDetailModelProtocol {
     var types: [PokemonTypeModel] { get }
     var weight: String { get }
     var height: String { get }
+    var chartData: [ChartData] { get }
 }
 
 struct PokemonDetailModel: PokemonDetailModelProtocol {
@@ -21,6 +22,10 @@ struct PokemonDetailModel: PokemonDetailModelProtocol {
 
     var image: URL? {
         URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(pokemonData.id).png")
+    }
+
+    var chartData: [ChartData] {
+        pokemonData.stats.map { ChartData(type: $0.stat.name.capitalized, value: $0.baseStat) }
     }
 
     var inGameImages: [SpriteImageModel] {

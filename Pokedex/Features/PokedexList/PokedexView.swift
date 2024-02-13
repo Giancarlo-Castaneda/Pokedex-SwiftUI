@@ -50,7 +50,7 @@ struct PokedexView: View {
             .onAppear {
                 handleState()
                 viewModel.getPokemonData()
-        }
+            }
         }
     }
 }
@@ -60,7 +60,7 @@ struct PokedexView: View {
 }
 
 extension PokedexView {
-    
+
     private func handleState() {
         viewModel.loadingState
             .receive(on: WorkScheduler.mainThread)

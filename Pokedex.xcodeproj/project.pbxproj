@@ -10,6 +10,7 @@
 		AB0023032B7B1842000E90F7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = AB0023022B7B1842000E90F7 /* Localizable.xcstrings */; };
 		AB00230C2B7B2203000E90F7 /* SpriteImagesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00230B2B7B2203000E90F7 /* SpriteImagesType.swift */; };
 		AB00230E2B7B221D000E90F7 /* SpriteImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00230D2B7B221D000E90F7 /* SpriteImageModel.swift */; };
+		AB0023102B7BAE2A000E90F7 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB00230F2B7BAE2A000E90F7 /* BarChartView.swift */; };
 		ABB793372B771EA900EDD3D0 /* PokedexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB793362B771EA900EDD3D0 /* PokedexApp.swift */; };
 		ABB7933B2B771EAB00EDD3D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABB7933A2B771EAB00EDD3D0 /* Assets.xcassets */; };
 		ABB7933E2B771EAB00EDD3D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABB7933D2B771EAB00EDD3D0 /* Preview Assets.xcassets */; };
@@ -59,6 +60,7 @@
 		AB0023022B7B1842000E90F7 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		AB00230B2B7B2203000E90F7 /* SpriteImagesType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteImagesType.swift; sourceTree = "<group>"; };
 		AB00230D2B7B221D000E90F7 /* SpriteImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteImageModel.swift; sourceTree = "<group>"; };
+		AB00230F2B7BAE2A000E90F7 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
 		ABB793332B771EA900EDD3D0 /* Pokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB793362B771EA900EDD3D0 /* PokedexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexApp.swift; sourceTree = "<group>"; };
 		ABB7933A2B771EAB00EDD3D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -268,6 +270,8 @@
 		ABB793732B772DFE00EDD3D0 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
+				AB00230F2B7BAE2A000E90F7 /* BarChartView.swift */,
+				ABB793A72B7ACE3B00EDD3D0 /* ChipView.swift */,
 				ABB793742B772E0C00EDD3D0 /* ImageView.swift */,
 			);
 			path = "UI Components";
@@ -316,8 +320,8 @@
 		ABB793892B7A739A00EDD3D0 /* PokedexList */ = {
 			isa = PBXGroup;
 			children = (
-				ABB793832B773BD100EDD3D0 /* PokedexListRequest.swift */,
 				ABB793902B7A777000EDD3D0 /* PokedexListRepository.swift */,
+				ABB793832B773BD100EDD3D0 /* PokedexListRequest.swift */,
 				ABB793782B77378700EDD3D0 /* PokedexListViewModel.swift */,
 				ABB793762B77307600EDD3D0 /* PokedexView.swift */,
 				ABB793442B771FDC00EDD3D0 /* PokemonCardView.swift */,
@@ -344,11 +348,10 @@
 		ABB793942B7A922700EDD3D0 /* PokemonDetail */ = {
 			isa = PBXGroup;
 			children = (
-				ABB793A72B7ACE3B00EDD3D0 /* ChipView.swift */,
-				ABB793952B7A923800EDD3D0 /* PokemonDetailView.swift */,
 				ABB793992B7A9C2900EDD3D0 /* PokemonDetailRepository.swift */,
-				ABB7939B2B7A9DBC00EDD3D0 /* PokemonDetailViewModel.swift */,
 				ABB793972B7A9B3B00EDD3D0 /* PokemonDetailRequest.swift */,
+				ABB793952B7A923800EDD3D0 /* PokemonDetailView.swift */,
+				ABB7939B2B7A9DBC00EDD3D0 /* PokemonDetailViewModel.swift */,
 			);
 			path = PokemonDetail;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				ABB793702B772CBE00EDD3D0 /* ImageCache.swift in Sources */,
 				ABB793452B771FDC00EDD3D0 /* PokemonCardView.swift in Sources */,
 				ABB793752B772E0C00EDD3D0 /* ImageView.swift in Sources */,
+				AB0023102B7BAE2A000E90F7 /* BarChartView.swift in Sources */,
 				ABB793792B77378700EDD3D0 /* PokedexListViewModel.swift in Sources */,
 				ABB793A82B7ACE3B00EDD3D0 /* ChipView.swift in Sources */,
 				ABB7939E2B7AA99C00EDD3D0 /* PokemonModel.swift in Sources */,

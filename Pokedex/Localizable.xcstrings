@@ -374,7 +374,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "POKEDEX"
+            "value" : "POKÉDEX"
           }
         },
         "es" : {
@@ -384,6 +384,9 @@
           }
         }
       }
+    },
+    "Population" : {
+
     },
     "PSYCHIC" : {
       "extractionState" : "manual",
@@ -516,6 +519,9 @@
           }
         }
       }
+    },
+    "Type" : {
+
     },
     "TYPE" : {
       "extractionState" : "manual",
