@@ -3,14 +3,22 @@ import Foundation
 
 final class PokemonDetailViewModel: DefaultViewModel {
 
+    // MARK: - Private Properties
+
     private let repository: PokemonDetailRepositoryProtocol
+
+    // MARK: - Internal Properties
 
     @Published private(set) var pokemonDetail = PokemonDetailModel(pokemonData: .mock)
     @Published private(set) var evolutionChain: [PokemonEvolutionModel] = []
 
+    // MARK: - Initialization
+
     init(repository: PokemonDetailRepositoryProtocol = PokemonDetailRepository()) {
         self.repository = repository
     }
+
+    // MARK: - Private Methods
 
     private func extractChainInfo(_ chain: Chain) -> [Chain] {
         var temp = chain.evolvesTo
@@ -19,6 +27,8 @@ final class PokemonDetailViewModel: DefaultViewModel {
 
         return temp
     }
+
+    // MARK: - Internal Methods
 
     func fetchEvolutionChain(id: Int) {
         let publisher = repository.fetchEvolution(id: id)
