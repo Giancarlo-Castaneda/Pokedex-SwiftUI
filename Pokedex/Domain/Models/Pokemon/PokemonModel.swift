@@ -1,7 +1,7 @@
 import Foundation
 
 protocol PokemonModelProtocol {
-    var id: String { get }
+    var id: Int { get }
     var image: URL? { get }
     var name: String { get }
 }
@@ -10,16 +10,16 @@ struct PokemonModel: PokemonModelProtocol {
 
     // MARK: - Computed Properties
 
-    var id: String {
-        String(pokemonData.url?.absoluteString.split(separator: "/").last ?? "")
+    var id: Int {
+        PokemonNumberGenerator.generate(from: pokemonData.url?.absoluteString ?? "" )
     }
 
     var image: URL? {
-        URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(id).png")
+        PokemonImageURLGenerator.generatePosterURL(for: id)
     }
 
     var name: String {
-        pokemonData.name
+        pokemonData.name.capitalized
     }
 
     // MARK: - Private Properties

@@ -21,7 +21,7 @@ struct PokemonCardView: View {
                 if let image = pokemon.image {
                     ImageView(withURL: image)
                 }
-                Text(pokemon.name.capitalized)
+                Text(pokemon.name)
                     .font(.title2)
                     .foregroundStyle(Color.primary)
             }

@@ -26,7 +26,7 @@ struct PokedexView: View {
                 LazyVGrid(columns: columns, content: {
                     ForEach(viewModel.pokemonList, id: \.name) { pokemon in
                         NavigationLink {
-                            PokemonDetailView(id: Int(pokemon.id) ?? 0)
+                            PokemonDetailView(id: pokemon.id)
                         } label: {
                             PokemonCardView(pokemon: pokemon)
                                 .frame(maxHeight: 300)
