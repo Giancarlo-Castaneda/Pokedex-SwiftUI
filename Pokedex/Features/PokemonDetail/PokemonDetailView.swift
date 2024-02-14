@@ -63,14 +63,6 @@ private struct PokemonDetailHeader: View {
                 .aspectRatio(contentMode: .fit)
                 .opacity(0.3)
             ImageView(withURL: image)
-            HStack {
-                Spacer()
-                Image(systemName: "play.circle")
-                    .resizable()
-                    .foregroundStyle(Color.mint)
-                    .frame(width: 60.0, height: 60.0)
-            }
-            .padding(.trailing)
         }
         .frame(maxHeight: 300)
     }
