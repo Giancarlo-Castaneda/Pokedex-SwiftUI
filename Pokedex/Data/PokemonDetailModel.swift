@@ -42,7 +42,7 @@ struct PokemonDetailModel: PokemonDetailModelProtocol {
     }
 
     var pokedexNumber: String {
-        "N.° \(pokemonData.id)"
+        String(localized: "NUM_POKEDEX \(pokemonData.id)")
     }
 
     var weight: String {

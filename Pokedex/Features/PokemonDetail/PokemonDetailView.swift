@@ -69,16 +69,8 @@ private struct PokemonDetailHeader: View {
     var showEvolutionButton: Bool
 
     var body: some View {
-        ZStack {
-            Image(.pokemonBg)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .opacity(0.3)
-            ImageView(withURL: image)
+        ZStack(alignment: .topTrailing) {
             if showEvolutionButton {
-                VStack {
-                    HStack {
-                        Spacer()
                         Button(action: {
                             showEvolutions = true
                         }, label: {
@@ -87,13 +79,15 @@ private struct PokemonDetailHeader: View {
                                 .aspectRatio(contentMode: .fit)
                         })
                         .frame(width: 40, height: 40)
-                    }
-                    Spacer()
-                }
-                .padding(.trailing, 20)
+                        .padding(20)
+            }
+            HStack {
+                Spacer()
+                PokemonImageView(imageURL: image)
+                    .frame(maxWidth: 300, maxHeight: 300)
+                Spacer()
             }
         }
-        .frame(maxHeight: 300)
     }
 }
 
@@ -156,6 +150,7 @@ private struct PokemonInGamePreviewView: View {
                         Spacer()
                         VStack {
                             ImageView(withURL: inGame.image)
+                                .aspectRatio(contentMode: .fit)
                                 .background(
                                     RoundedRectangle(cornerRadius: 45)
                                         .fill(Color.gray.opacity(0.3))

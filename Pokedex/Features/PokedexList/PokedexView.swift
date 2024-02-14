@@ -29,7 +29,6 @@ struct PokedexView: View {
                             PokemonDetailView(id: pokemon.id)
                         } label: {
                             PokemonCardView(pokemon: pokemon)
-                                .frame(maxHeight: 300)
                         }
                     }
                     if isLoading {

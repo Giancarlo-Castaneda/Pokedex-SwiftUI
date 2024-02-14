@@ -335,9 +335,6 @@
         }
       }
     },
-    "No.º %lld" : {
-
-    },
     "NORMAL" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -351,6 +348,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Normal"
+          }
+        }
+      }
+    },
+    "NUM_POKEDEX %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No.º %lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No.º %lld"
           }
         }
       }

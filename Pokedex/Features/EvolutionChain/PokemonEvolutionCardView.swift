@@ -12,22 +12,15 @@ struct PokemonEvolutionCardView: View {
 
     var body: some View {
         HStack {
-            ZStack {
-                Image(.pokemonBg)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .opacity(0.3)
+            if let image = pokemon.image {
+                PokemonImageView(imageURL: image)
                     .frame(height: 100)
-                if let image = pokemon.image {
-                    ImageView(withURL: image)
-                        .frame(height: 80)
-                }
             }
             VStack(alignment: .leading) {
                 Text(pokemon.name)
                     .font(.title3)
                     .fontWeight(.bold)
-                Text("No.º \(pokemon.id)")
+                Text("NUM_POKEDEX \(pokemon.id)")
                     .font(.caption)
             }
         }
