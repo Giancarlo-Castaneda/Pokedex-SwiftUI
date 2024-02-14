@@ -30,7 +30,7 @@ final class PokedexListViewModel: DefaultViewModel {
             guard let self else { return }
 
             totalPokemons = data.count
-            let pokemons = data.results.map { PokemonModel(pokemonData: $0) }
+            let pokemons = data.results.map { PokemonModel($0) }
 
             pokemonList.append(contentsOf: pokemons)
             page += pokemons.count

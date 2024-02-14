@@ -12,7 +12,7 @@ protocol PokemonDetailRepositoryProtocol {
 
     func fetch(id: Int) -> AnyPublisher<PokemonDetailResponse, APIError>
     func fetchEvolution(id: Int) -> AnyPublisher<EvolutionChainResponse, APIError>
-
+    func fetchSpecies(for id: Int) -> AnyPublisher<PokemonSpeciesResponse, APIError>
 }
 
 final class PokemonDetailRepository: NetworkClientManager<HttpRequest>, PokemonDetailRepositoryProtocol {
@@ -23,6 +23,14 @@ final class PokemonDetailRepository: NetworkClientManager<HttpRequest>, PokemonD
         return request(request: endpoint,
                        scheduler: WorkScheduler.mainScheduler,
                        responseObject: PokemonDetailResponse.self)
+    }
+
+    func fetchSpecies(for id: Int) -> AnyPublisher<PokemonSpeciesResponse, APIError> {
+        let endpoint = HttpRequest(request: PokemonSpeciesRequest(pokemonId: id))
+
+        return request(request: endpoint, 
+                       scheduler: WorkScheduler.mainScheduler,
+                       responseObject: PokemonSpeciesResponse.self)
     }
 
     func fetchEvolution(id: Int) -> AnyPublisher<EvolutionChainResponse, APIError> {

@@ -28,7 +28,7 @@ struct PokemonModel: PokemonModelProtocol {
 
     // MARK: - Initialization
 
-    init(pokemonData: NamedURLResource) {
+    init(_ pokemonData: NamedURLResource) {
         self.pokemonData = pokemonData
     }
 }

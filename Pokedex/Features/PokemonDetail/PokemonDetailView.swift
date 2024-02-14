@@ -11,6 +11,7 @@ struct PokemonDetailView: View {
 
     private let id: Int
 
+    @State private var showingEvolutionsSheet = false
     @StateObject var detailViewModel: PokemonDetailViewModel = .init()
 
     init(id: Int) {
@@ -21,7 +22,9 @@ struct PokemonDetailView: View {
         ScrollView {
             VStack {
                 if let image = detailViewModel.pokemonDetail.image {
-                    PokemonDetailHeader(image: image)
+                    PokemonDetailHeader(image: image, 
+                                        showEvolutions: $showingEvolutionsSheet,
+                                        showEvolutionButton: detailViewModel.isEvolutionAvailable)
                 }
 
                 HStack {
@@ -42,27 +45,53 @@ struct PokemonDetailView: View {
             }
             .onAppear {
                 detailViewModel.fetch(id: id)
+                detailViewModel.fetchEvolutionChain(id: id)
             }
         }
         .background(Color.purple.opacity(0.3))
         .scrollIndicators(.hidden)
+        .sheet(isPresented: $showingEvolutionsSheet) {
+            if let chain = detailViewModel.evolutionChain {
+                PokemonEvolutionView(evolutionChain: chain)
+                    .presentationDetents([.height(chain.chainType.actionSheetHeight)])
+            }
+        }
     }
 }
 
 #Preview {
-    PokemonDetailView(id: 14)
+    PokemonDetailView(id: 133)
 }
 
 private struct PokemonDetailHeader: View {
     let image: URL
+    @Binding var showEvolutions: Bool
+    var showEvolutionButton: Bool
 
     var body: some View {
-        ZStack(alignment: .centerLastTextBaseline) {
+        ZStack {
             Image(.pokemonBg)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .opacity(0.3)
             ImageView(withURL: image)
+            if showEvolutionButton {
+                VStack {
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            showEvolutions = true
+                        }, label: {
+                            Image(.dna)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        })
+                        .frame(width: 40, height: 40)
+                    }
+                    Spacer()
+                }
+                .padding(.trailing, 20)
+            }
         }
         .frame(maxHeight: 300)
     }

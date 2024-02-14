@@ -335,6 +335,9 @@
         }
       }
     },
+    "No.º %lld" : {
+
+    },
     "NORMAL" : {
       "extractionState" : "manual",
       "localizations" : {

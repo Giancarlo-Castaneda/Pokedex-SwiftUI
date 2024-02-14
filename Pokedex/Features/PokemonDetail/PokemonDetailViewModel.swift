@@ -10,7 +10,8 @@ final class PokemonDetailViewModel: DefaultViewModel {
     // MARK: - Internal Properties
 
     @Published private(set) var pokemonDetail = PokemonDetailModel(pokemonData: .mock)
-    @Published private(set) var evolutionChain: [PokemonEvolutionModel] = []
+    @Published private(set) var evolutionChain: EvolutionChainModel? = nil
+    @Published private(set) var isEvolutionAvailable = false
 
     // MARK: - Initialization
 
@@ -18,28 +19,27 @@ final class PokemonDetailViewModel: DefaultViewModel {
         self.repository = repository
     }
 
-    // MARK: - Private Methods
-
-    private func extractChainInfo(_ chain: EvolutionChainResponse.ChainLink) -> [EvolutionChainResponse.ChainLink] {
-        var temp = chain.evolvesTo
-        temp.append(contentsOf: chain.evolvesTo.map { extractChainInfo($0) }
-            .reduce([], +))
-
-        return temp
-    }
-
     // MARK: - Internal Methods
 
     func fetchEvolutionChain(id: Int) {
-        let publisher = repository.fetchEvolution(id: id)
+        let speciesPublisher = repository.fetchSpecies(for: id)
 
-        callWithProgress(argument: publisher) { [weak self] data in
+        callWithProgress(argument: speciesPublisher) { [weak self] data in
             guard let self else { return }
+            let species = PokemonSpeciesModel(data)
 
-            var temp = [data.chain]
-            temp.append(contentsOf: extractChainInfo(data.chain))
+            guard species.evolutionChainId != 0 else {
+                return isEvolutionAvailable = false
+            }
 
-            evolutionChain = temp.map { PokemonEvolutionModel(chainData: $0) }
+            let publisher = repository.fetchEvolution(id: species.evolutionChainId)
+
+            callWithProgress(argument: publisher) { [weak self] data in
+                guard let self else { return }
+
+                evolutionChain = EvolutionChainModel(data)
+                isEvolutionAvailable = evolutionChain?.chainType != EvolutionChainModel.ChainType.none
+            }
         }
     }
 
