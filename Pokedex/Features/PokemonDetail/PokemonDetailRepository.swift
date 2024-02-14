@@ -10,23 +10,26 @@ import Foundation
 
 protocol PokemonDetailRepositoryProtocol {
 
-    func fetch(id: Int) -> AnyPublisher<PokemonData, APIError>
-    func fetchEvolution(id: Int) -> AnyPublisher<EvolutionData, APIError>
+    func fetch(id: Int) -> AnyPublisher<PokemonDetailResponse, APIError>
+    func fetchEvolution(id: Int) -> AnyPublisher<EvolutionChainResponse, APIError>
+
 }
 
 final class PokemonDetailRepository: NetworkClientManager<HttpRequest>, PokemonDetailRepositoryProtocol {
 
-    func fetch(id: Int) -> AnyPublisher<PokemonData, APIError> {
+    func fetch(id: Int) -> AnyPublisher<PokemonDetailResponse, APIError> {
         let endpoint = HttpRequest(request: PokemonDetailRequest(id: id))
 
         return request(request: endpoint,
                        scheduler: WorkScheduler.mainScheduler,
-                       responseObject: PokemonData.self)
+                       responseObject: PokemonDetailResponse.self)
     }
 
-    func fetchEvolution(id: Int) -> AnyPublisher<EvolutionData, APIError> {
+    func fetchEvolution(id: Int) -> AnyPublisher<EvolutionChainResponse, APIError> {
         let endpoint = HttpRequest(request: PokemonEvolutionRequest(id: id))
 
-        return request(request: endpoint, scheduler: WorkScheduler.mainScheduler, responseObject: EvolutionData.self)
+        return request(request: endpoint,
+                       scheduler: WorkScheduler.mainScheduler,
+                       responseObject: EvolutionChainResponse.self)
     }
 }

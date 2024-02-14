@@ -28,10 +28,10 @@ struct PokemonEvolutionModel: PokemonEvolutionModelProtocol {
         chainData.species.name
     }
 
-    private let chainData: Chain
+    private let chainData: EvolutionChainResponse.ChainLink
     private let pokemonId: Int
 
-    init(chainData: Chain, pokemonId: Int = 0) {
+    init(chainData: EvolutionChainResponse.ChainLink, pokemonId: Int = 0) {
         self.chainData = chainData
         self.pokemonId = pokemonId
     }

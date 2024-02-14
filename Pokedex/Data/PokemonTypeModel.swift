@@ -47,11 +47,11 @@ struct PokemonTypeModel: PokemonTypeModelProtocol {
         PokemonType(rawValue: type.type.name) ?? .normal
     }
 
-    private let type: TypeElement
+    private let type: PokemonDetailResponse.PokemonType
 
     // MARK: - Initialization
 
-    init(type: TypeElement) {
+    init(type: PokemonDetailResponse.PokemonType) {
         self.type = type
     }
 }

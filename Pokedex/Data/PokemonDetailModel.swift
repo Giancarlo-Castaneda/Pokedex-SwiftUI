@@ -67,11 +67,11 @@ struct PokemonDetailModel: PokemonDetailModelProtocol {
 
     // MARK: - Private Properties
 
-    private let pokemonData: PokemonData
+    private let pokemonData: PokemonDetailResponse
 
     // MARK: - Initialization
 
-    init(pokemonData: PokemonData) {
+    init(pokemonData: PokemonDetailResponse) {
         self.pokemonData = pokemonData
     }
 }

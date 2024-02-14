@@ -11,7 +11,7 @@ struct PokemonModel: PokemonModelProtocol {
     // MARK: - Computed Properties
 
     var id: String {
-        String(pokemonData.url.absoluteString.split(separator: "/").last ?? "")
+        String(pokemonData.url?.absoluteString.split(separator: "/").last ?? "")
     }
 
     var image: URL? {
@@ -24,11 +24,11 @@ struct PokemonModel: PokemonModelProtocol {
 
     // MARK: - Private Properties
 
-    private let pokemonData: PokemonGeneralData
+    private let pokemonData: NamedURLResource
 
     // MARK: - Initialization
 
-    init(pokemonData: PokemonGeneralData) {
+    init(pokemonData: NamedURLResource) {
         self.pokemonData = pokemonData
     }
 }

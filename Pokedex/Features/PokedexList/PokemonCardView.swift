@@ -34,5 +34,5 @@ struct PokemonCardView: View {
 }
 
 #Preview {
-    PokemonCardView(pokemon: PokemonModel(pokemonData: PokemonGeneralData(name: "poke", url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10277.png")!)))
+    PokemonCardView(pokemon: PokemonModel(pokemonData: NamedURLResource(name: "poke", url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10277.png")!)))
 }

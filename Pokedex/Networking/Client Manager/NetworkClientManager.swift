@@ -20,10 +20,12 @@ class NetworkClientManager<Target: RequestBuilder> {
     }
 
     func request<M, T>(request: Target,
-                       decoder: JSONDecoder = .init(),
                        scheduler: T,
                        responseObject type: M.Type) -> AnyPublisherResult<M> where M: Decodable, T: Scheduler {
 
-        clientURLSession.perform(with: request, decoder: decoder, scheduler: scheduler, responseObject: type)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        return clientURLSession.perform(with: request, decoder: decoder, scheduler: scheduler, responseObject: type)
     }
 }

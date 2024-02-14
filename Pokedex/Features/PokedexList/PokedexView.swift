@@ -72,7 +72,7 @@ extension PokedexView {
                 case .dismissAlert:
                     isLoading = false
 
-                case let .emptyStateHandler(title, isShow):
+                case .emptyStateHandler:
                     isLoading = false
                 }
             }

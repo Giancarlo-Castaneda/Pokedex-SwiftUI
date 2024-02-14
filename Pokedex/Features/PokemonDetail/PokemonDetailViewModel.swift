@@ -20,7 +20,7 @@ final class PokemonDetailViewModel: DefaultViewModel {
 
     // MARK: - Private Methods
 
-    private func extractChainInfo(_ chain: Chain) -> [Chain] {
+    private func extractChainInfo(_ chain: EvolutionChainResponse.ChainLink) -> [EvolutionChainResponse.ChainLink] {
         var temp = chain.evolvesTo
         temp.append(contentsOf: chain.evolvesTo.map { extractChainInfo($0) }
             .reduce([], +))
