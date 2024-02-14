@@ -21,7 +21,7 @@ struct PokemonDetailModel: PokemonDetailModelProtocol {
     }
 
     var image: URL? {
-        URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(pokemonData.id).png")
+        PokemonImageURLGenerator.generatePosterURL(for: pokemonData.id)
     }
 
     var chartData: [ChartData] {

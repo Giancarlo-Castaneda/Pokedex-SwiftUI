@@ -21,7 +21,7 @@ struct PokemonEvolutionModel: PokemonEvolutionModelProtocol {
     }
 
     var image: URL? {
-        URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(pokemonId).png")
+        PokemonImageURLGenerator.generatePosterURL(for: pokemonId)
     }
 
     var name: String {
