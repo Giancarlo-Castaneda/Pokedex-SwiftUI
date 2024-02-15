@@ -8,7 +8,7 @@
 import Foundation
 
 /// Common name & URL resource.
-struct NamedURLResource: Decodable {
+struct NamedURLResource: Decodable, Hashable {
 
     let name: String
 

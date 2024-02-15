@@ -24,11 +24,16 @@ struct PokedexView: View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
                 LazyVGrid(columns: columns, content: {
-                    ForEach(viewModel.pokemonList, id: \.name) { pokemon in
+                    ForEach(viewModel.pokemonList, id: \.self) { pokemon in
                         NavigationLink {
                             PokemonDetailView(id: pokemon.id)
                         } label: {
                             PokemonCardView(pokemon: pokemon)
+                                .onAppear() {
+                                    if viewModel.shouldLoadNewPokemons(for: pokemon) {
+                                        viewModel.getPokemonData()
+                                    }
+                                }
                         }
                     }
                     if isLoading {

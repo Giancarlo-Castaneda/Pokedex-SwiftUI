@@ -32,3 +32,12 @@ struct PokemonModel: PokemonModelProtocol {
         self.pokemonData = pokemonData
     }
 }
+
+extension PokemonModel: Hashable { }
+
+extension PokemonModel: Equatable {
+
+    static func == (lhs: PokemonModel, rhs: PokemonModel) -> Bool {
+        lhs.id == rhs.id && lhs.name == rhs.name && lhs.image == rhs.image
+    }
+}
