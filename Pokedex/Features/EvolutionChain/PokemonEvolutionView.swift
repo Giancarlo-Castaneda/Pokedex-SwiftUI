@@ -8,27 +8,42 @@
 import SwiftUI
 
 struct PokemonEvolutionView: View {
+    @Environment(\.dismiss) var dismiss
     let evolutionChain: EvolutionChainModel
+    @State private var orientation = UIDeviceOrientation.portrait
 
     var body: some View {
         ScrollView(.horizontal) {
-            LazyHStack {
-                ForEach(evolutionChain.evolutionChains, id: \.id) { count in
+            VStack(alignment: .trailing) {
+                Button(action: {
+                    dismiss.callAsFunction()
+                }, label: {
+                    Image(systemName: "xmark.circle")
+                        .resizable()
+                        .foregroundStyle(Color.darkConstrast)
+                })
+                .frame(width: 35, height: 35)
+                .padding(.trailing, 20)
+                .padding(.top, 20)
 
-                    LazyVGrid(columns: [GridItem(.fixed(300))], spacing: 15) {
-                        ForEach(count.pokemons, id: \.id) {
-                            PokemonEvolutionCardView(pokemon: $0)
+                LazyHStack {
+                    ForEach(evolutionChain.evolutionChains, id: \.id) { count in
+
+                        LazyVGrid(columns: [GridItem(.fixed(300))], spacing: 15) {
+                            ForEach(count.pokemons, id: \.id) {
+                                PokemonEvolutionCardView(pokemon: $0)
+                            }
+                        }
+                        .containerRelativeFrame(.horizontal)
+                        .scrollTransition(.animated, axis: .horizontal) { content, phase in
+                            content
+                                .opacity(phase.isIdentity ? 1.0 : 0.8)
+                                .scaleEffect(phase.isIdentity ? 1.0 : 0.8)
                         }
                     }
-                    .containerRelativeFrame(.horizontal)
-                    .scrollTransition(.animated, axis: .horizontal) { content, phase in
-                        content
-                            .opacity(phase.isIdentity ? 1.0 : 0.8)
-                            .scaleEffect(phase.isIdentity ? 1.0 : 0.8)
-                    }
                 }
+                .scrollTargetLayout()
             }
-            .scrollTargetLayout()
         }
         .scrollIndicators(.automatic)
         .scrollTargetBehavior(.viewAligned)

@@ -27,9 +27,9 @@ struct PokemonEvolutionCardView: View {
         .frame(width: 280)
         .background {
             RoundedRectangle(cornerRadius: 70, style: .continuous)
-                .fill(Color.white)
+                .fill(Color.lightConstrast)
         }
-        .shadow(color: .black.opacity(0.1), radius: 25)
+        .shadow(color: .darkConstrast.opacity(0.25), radius: 25)
     }
 }
 

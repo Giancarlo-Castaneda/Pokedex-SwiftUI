@@ -1,5 +1,6 @@
 import Combine
 import Foundation
+import SwiftUI
 
 final class PokemonDetailViewModel: DefaultViewModel {
 
@@ -12,6 +13,7 @@ final class PokemonDetailViewModel: DefaultViewModel {
     @Published private(set) var pokemonDetail = PokemonDetailModel(pokemonData: .mock)
     @Published private(set) var evolutionChain: EvolutionChainModel? = nil
     @Published private(set) var isEvolutionAvailable = false
+    @Published private(set) var headerColor: [Color] = []
 
     // MARK: - Initialization
 
@@ -50,6 +52,7 @@ final class PokemonDetailViewModel: DefaultViewModel {
             guard let self else { return }
 
             self.pokemonDetail = PokemonDetailModel(pokemonData: data)
+            self.headerColor = self.pokemonDetail.types.map { $0.color }.reduce([], +)
         }
     }
 }

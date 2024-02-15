@@ -11,6 +11,7 @@ struct PokemonDetailView: View {
 
     private let id: Int
 
+    @State private var orientation = UIDeviceOrientation.portrait
     @State private var showingEvolutionsSheet = false
     @StateObject var detailViewModel: PokemonDetailViewModel = .init()
 
@@ -21,10 +22,20 @@ struct PokemonDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                if let image = detailViewModel.pokemonDetail.image {
-                    PokemonDetailHeader(image: image, 
-                                        showEvolutions: $showingEvolutionsSheet,
-                                        showEvolutionButton: detailViewModel.isEvolutionAvailable)
+                ZStack {
+                    Rectangle()
+                        .fill(
+                            LinearGradient(colors: detailViewModel.headerColor, startPoint: .top, endPoint: .bottom)
+                        )
+                        .roundedCorner(.infinity, corners: [.bottomLeft, .bottomRight])
+                        .offset(CGSize(width: 0, height: orientation.isPortrait ? -60.0 : 0))
+
+                    if let image = detailViewModel.pokemonDetail.image {
+                        PokemonDetailHeader(image: image,
+                                            showEvolutions: $showingEvolutionsSheet,
+                                            showEvolutionButton: detailViewModel.isEvolutionAvailable)
+                        .padding(.top, orientation.isPortrait ? 100 : 0)
+                    }
                 }
 
                 HStack {
@@ -48,7 +59,12 @@ struct PokemonDetailView: View {
                 detailViewModel.fetchEvolutionChain(id: id)
             }
         }
-        .background(Color.purple.opacity(0.3))
+        .onRotate { newOrientation in
+            orientation = newOrientation
+        }
+        .scrollBounceBehavior(.basedOnSize)
+        .ignoresSafeArea(edges: orientation.isPortrait ? .vertical : .top)
+        .background(Color.lightConstrast.opacity(0.3))
         .scrollIndicators(.hidden)
         .sheet(isPresented: $showingEvolutionsSheet) {
             if let chain = detailViewModel.evolutionChain {
@@ -60,7 +76,7 @@ struct PokemonDetailView: View {
 }
 
 #Preview {
-    PokemonDetailView(id: 133)
+    PokemonDetailView(id: 49)
 }
 
 private struct PokemonDetailHeader: View {
@@ -69,7 +85,7 @@ private struct PokemonDetailHeader: View {
     var showEvolutionButton: Bool
 
     var body: some View {
-        ZStack(alignment: .topTrailing) {
+        ZStack(alignment: .bottomTrailing) {
             if showEvolutionButton {
                         Button(action: {
                             showEvolutions = true
@@ -77,8 +93,10 @@ private struct PokemonDetailHeader: View {
                             Image(.dna)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
+                                .foregroundStyle(Color.darkConstrast)
                         })
                         .frame(width: 40, height: 40)
+                        .shadow(color: .darkConstrast.opacity(0.9), radius: 10)
                         .padding(20)
             }
             HStack {

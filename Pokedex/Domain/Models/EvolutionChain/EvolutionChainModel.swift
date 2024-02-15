@@ -81,9 +81,9 @@ extension EvolutionChainModel.ChainType {
     var actionSheetHeight: CGFloat {
         switch self {
         case .single:
-            return 250
+            return 350
         case .dual:
-            return 400
+            return 430
         case .none:
             return 0
         }
