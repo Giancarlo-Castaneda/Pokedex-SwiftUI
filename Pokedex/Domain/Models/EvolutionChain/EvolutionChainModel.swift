@@ -28,7 +28,7 @@ struct EvolutionChainModel: EvolutionChainModelProtocol {
             }
         }
 
-        return species.map { EvolutionChain($0) }
+        return species.enumerated().map { EvolutionChain($1, id: $0) }
     }
 
     var chainType: ChainType {
@@ -45,12 +45,12 @@ struct EvolutionChainModel: EvolutionChainModelProtocol {
 extension EvolutionChainModel {
 
     struct EvolutionChain {
-        let id = UUID()
-
+        let id: Int
         let pokemons: [PokemonModel]
 
-        init(_ species: [NamedURLResource]) {
+        init(_ species: [NamedURLResource], id: Int) {
             self.pokemons = species.map { PokemonModel($0) }
+            self.id = id
         }
     }
 }

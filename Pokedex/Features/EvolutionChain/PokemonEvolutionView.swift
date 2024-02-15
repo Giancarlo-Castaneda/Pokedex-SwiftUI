@@ -10,60 +10,57 @@ import SwiftUI
 struct PokemonEvolutionView: View {
     @Environment(\.dismiss) var dismiss
     let evolutionChain: EvolutionChainModel
-    @State private var orientation = UIDeviceOrientation.portrait
 
     var body: some View {
-        ScrollView(.horizontal) {
-            VStack(alignment: .trailing) {
-                Button(action: {
-                    dismiss.callAsFunction()
-                }, label: {
-                    Image(systemName: "xmark.circle")
-                        .resizable()
-                        .foregroundStyle(Color.darkConstrast)
-                })
-                .frame(width: 35, height: 35)
-                .padding(.trailing, 20)
-                .padding(.top, 20)
+        ZStack(alignment: .topTrailing) {
+            TabView {
+                ForEach(evolutionChain.evolutionChains, id: \.id) { count in
 
-                LazyHStack {
-                    ForEach(evolutionChain.evolutionChains, id: \.id) { count in
-
-                        LazyVGrid(columns: [GridItem(.fixed(300))], spacing: 15) {
-                            ForEach(count.pokemons, id: \.id) {
-                                PokemonEvolutionCardView(pokemon: $0)
-                            }
-                        }
-                        .containerRelativeFrame(.horizontal)
-                        .scrollTransition(.animated, axis: .horizontal) { content, phase in
-                            content
-                                .opacity(phase.isIdentity ? 1.0 : 0.8)
-                                .scaleEffect(phase.isIdentity ? 1.0 : 0.8)
+                    LazyVGrid(columns: [GridItem(.fixed(300))], spacing: 15) {
+                        ForEach(count.pokemons, id: \.id) { current in
+                            PokemonEvolutionCardView(pokemon: current)
                         }
                     }
+                    .tag(count.id)
                 }
-                .scrollTargetLayout()
             }
+            .tabViewStyle(.page(indexDisplayMode: .automatic))
+            .indexViewStyle(.page(backgroundDisplayMode: .always))
+
+            Button(action: {
+                dismiss.callAsFunction()
+            }, label: {
+                Image(systemName: "xmark.circle")
+                    .resizable()
+                    .foregroundStyle(Color.darkConstrast)
+            })
+            .frame(width: 35, height: 35)
+            .padding(.trailing, 20)
+            .padding(.top, 20)
         }
-        .scrollIndicators(.automatic)
-        .scrollTargetBehavior(.viewAligned)
     }
 }
 
 #Preview {
+    let big2 = NamedURLResource(name: "raticate-alola", url: URL(string: "https://pokeapi.co/api/v2/pokemon/10089/"))
+    let evoChain2 = EvolutionChainResponse.ChainLink.init(evolutionDetails: [],
+                                                          evolvesTo: [],
+                                                          isBaby: false,
+                                                          species: big2)
+
     let big = NamedURLResource(name: "raticate-alola", url: URL(string: "https://pokeapi.co/api/v2/pokemon/10092/"))
     let evoChain = EvolutionChainResponse.ChainLink.init(evolutionDetails: [],
-                                                      evolvesTo: [],
-                                                      isBaby: false,
-                                                      species: big)
+                                                         evolvesTo: [],
+                                                         isBaby: false,
+                                                         species: big)
     let small = NamedURLResource(name: "rattata-alola", url: URL(string: "https://pokeapi.co/api/v2/pokemon/10091/"))
     let chain = EvolutionChainResponse.ChainLink.init(evolutionDetails: [],
-                                                      evolvesTo: [evoChain],
+                                                      evolvesTo: [evoChain, evoChain2],
                                                       isBaby: false,
                                                       species: small)
     let completeChain = EvolutionChainModel(.init(babyTriggerItem: nil,
-                                             chain: chain,
-                                             id: 0))
+                                                  chain: chain,
+                                                  id: 0))
 
     return PokemonEvolutionView(evolutionChain: completeChain)
 }

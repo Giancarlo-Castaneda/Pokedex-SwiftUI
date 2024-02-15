@@ -76,7 +76,7 @@ struct PokemonDetailView: View {
 }
 
 #Preview {
-    PokemonDetailView(id: 49)
+    PokemonDetailView(id: 133)
 }
 
 private struct PokemonDetailHeader: View {
