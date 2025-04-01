@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -141,6 +141,11 @@
 		ABB793A72B7ACE3B00EDD3D0 /* ChipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChipView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		ABD7E5512CDD49B3003D05A2 /* Games */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Games; sourceTree = "<group>"; };
+		ABD7E5552CDD4AE6003D05A2 /* PokedexSelection */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PokedexSelection; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		ABB793302B771EA900EDD3D0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -227,6 +232,7 @@
 		AB6E24742B7D13470023A5AB /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				ABD7E5512CDD49B3003D05A2 /* Games */,
 				AB6E24752B7D14420023A5AB /* EvolutionChain */,
 				AB6E24762B7D144A0023A5AB /* PokemonDetail */,
 				AB6E24772B7D14550023A5AB /* PokemonSpecies */,
@@ -538,6 +544,7 @@
 		ABB793882B7A739100EDD3D0 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				ABD7E5552CDD4AE6003D05A2 /* PokedexSelection */,
 				AB6E248B2B7D6B8B0023A5AB /* EvolutionChain */,
 				ABB793892B7A739A00EDD3D0 /* PokedexList */,
 				ABB793942B7A922700EDD3D0 /* PokemonDetail */,
@@ -597,6 +604,10 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				ABD7E5512CDD49B3003D05A2 /* Games */,
+				ABD7E5552CDD4AE6003D05A2 /* PokedexSelection */,
 			);
 			name = Pokedex;
 			productName = Pokedex;
@@ -849,7 +860,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Pokedex/Preview Content\"";
-				DEVELOPMENT_TEAM = U2HHD8L7L2;
+				DEVELOPMENT_TEAM = 8LQT94G2T2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -878,7 +889,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Pokedex/Preview Content\"";
-				DEVELOPMENT_TEAM = U2HHD8L7L2;
+				DEVELOPMENT_TEAM = 8LQT94G2T2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

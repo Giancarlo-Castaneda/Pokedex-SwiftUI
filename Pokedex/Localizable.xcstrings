@@ -68,6 +68,9 @@
         }
       }
     },
+    "Detail View %@" : {
+
+    },
     "DRAGON" : {
       "extractionState" : "manual",
       "localizations" : {
